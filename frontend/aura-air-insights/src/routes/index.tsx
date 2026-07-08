@@ -101,8 +101,8 @@ function Index() {
               Backend Connection Offline
             </h2>
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
-              Failed to connect to the live FastAPI backend server at <code className="rounded bg-muted px-1.5 py-0.5 font-semibold text-foreground">http://127.0.0.1:8000</code>.
-              Please ensure your python server is active by running <code className="rounded bg-muted px-1.5 py-0.5 font-semibold text-foreground">uvicorn app.main:app</code>.
+              Failed to connect to the live FastAPI backend server at <code className="rounded bg-muted px-1.5 py-0.5 font-semibold text-foreground">{API_BASE}</code>.
+              Please ensure your backend server is active and accessible.
             </p>
             <div className="mt-8 flex justify-center">
               <Button onClick={() => { setInitialLoading(true); setIsBackendOffline(false); loadData(); }} className="rounded-full bg-destructive text-destructive-foreground hover:bg-destructive/90 gap-2">
