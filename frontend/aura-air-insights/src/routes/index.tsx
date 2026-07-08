@@ -18,7 +18,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const API_BASE = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
+const API_BASE = import.meta.env.VITE_API_URL;
 
 function Index() {
   const [current, setCurrent] = useState<{ aqi: number; dominant: string } | null>(null);
