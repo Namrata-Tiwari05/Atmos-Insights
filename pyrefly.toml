@@ -1,0 +1,16 @@
+python-interpreter-path = ".venv/Scripts/python.exe"
+
+[errors]
+missing-attribute = false
+no-matching-overload = false
+untyped-import = false
+missing-import = false
+
+[tool.pyrefly]
+python-interpreter-path = ".venv/Scripts/python.exe"
+
+[tool.pyrefly.errors]
+missing-attribute = false
+no-matching-overload = false
+untyped-import = false
+missing-import = false

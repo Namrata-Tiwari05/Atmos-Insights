@@ -1,0 +1,21 @@
+{
+    "best_model_name": "Random Forest",
+    "features": [
+        "pm2.5",
+        "pm10",
+        "O3",
+        "NO2",
+        "SO2",
+        "co",
+        "Month",
+        "DayOfWeek",
+        "IsWeekend",
+        "season_Autumn",
+        "season_Monsoon",
+        "season_Spring",
+        "season_Summer",
+        "season_Winter"
+    ],
+    "training_date": "2026-07-07 19:05:36",
+    "project_version": "1.1.0"
+}
