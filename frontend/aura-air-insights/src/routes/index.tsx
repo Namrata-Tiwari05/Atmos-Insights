@@ -88,11 +88,11 @@ function Index() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground animate-fade-in">
+    <div className="min-h-screen bg-background text-foreground animate-fade-in font-sans flex flex-col">
       <Navbar />
 
       {isBackendOffline ? (
-        <div className="mx-auto max-w-4xl px-4 py-20 text-center">
+        <div className="mx-auto max-w-4xl px-4 py-20 text-center flex-1 flex flex-col justify-center">
           <div className="rounded-3xl border border-destructive/30 bg-destructive/5 p-8 md:p-12 backdrop-blur shadow-lg">
             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-destructive/10 text-destructive">
               <AlertCircle className="h-8 w-8" />
@@ -112,12 +112,12 @@ function Index() {
           </div>
         </div>
       ) : initialLoading ? (
-        <div className="flex min-h-[60vh] flex-col items-center justify-center gap-4 text-center">
+        <div className="flex min-h-[60vh] flex-1 flex-col items-center justify-center gap-4 text-center">
           <span className="h-10 w-10 animate-spin rounded-full border-4 border-brand border-t-transparent" />
           <p className="text-sm font-semibold text-muted-foreground animate-pulse">Connecting to live FastAPI backend and validating ML models...</p>
         </div>
       ) : (
-        <main className="space-y-20 pb-20 sm:space-y-24">
+        <main className="space-y-20 pb-20 sm:space-y-24 flex-1">
           <Hero currentAQI={currentAQI} />
           {current && (
             <Overview 

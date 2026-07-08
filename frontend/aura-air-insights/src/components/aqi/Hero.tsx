@@ -7,51 +7,75 @@ interface HeroProps {
 
 export function Hero({ currentAQI }: HeroProps) {
   return (
-    <section id="home" className="relative overflow-hidden font-sans">
+    <section id="home" className="relative overflow-hidden font-sans pt-12 pb-16">
       <div className="mesh-bg absolute inset-0 -z-10" />
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 pb-16 pt-16 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:pb-24 lg:pt-24">
-        <div className="flex flex-col justify-center">
-          <div className="inline-flex w-fit items-center gap-2 rounded-full border border-border/40 bg-card/45 px-4 py-1.5 text-xs font-medium text-muted-foreground/80 backdrop-blur">
+      
+      {/* Top Header Block: Heading left, Description & CTAs right (inspired by premium SaaS layout) */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 grid gap-6 lg:grid-cols-[1.1fr_0.9fr] items-end pb-12">
+        <div>
+          <div className="inline-flex w-fit items-center gap-2 rounded-full border border-border/40 bg-card/45 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground/80 backdrop-blur">
             <span className="text-brand opacity-90">🌍</span>
             Real-Time Air Quality Monitoring • ML Forecasting
           </div>
           <h1 
-            className="mt-6 text-foreground tracking-tight"
+            className="mt-6 text-foreground tracking-tight text-left"
             style={{
               fontFamily: "'Plus Jakarta Sans', sans-serif",
-              fontSize: "clamp(2.25rem, 5.5vw, 4rem)",
-              lineHeight: "0.95",
+              fontSize: "clamp(2.5rem, 5.8vw, 4.25rem)",
+              lineHeight: "0.92",
               letterSpacing: "-0.04em",
-              fontWeight: 800,
+              fontWeight: 900,
+              textTransform: "uppercase"
             }}
           >
-            Real-Time Air Quality <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">Monitoring & Forecasting</span>.
+            Real-Time Air Quality <br />
+            <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">Monitoring & Forecasting.</span>
           </h1>
-          <p className="mt-6 max-w-[62ch] text-[16px] lg:text-[18px] leading-[1.7] text-muted-foreground font-normal">
+        </div>
+        
+        <div className="flex flex-col lg:items-start gap-5">
+          <p className="max-w-[50ch] text-[16px] lg:text-[17px] leading-[1.65] text-muted-foreground font-normal text-left">
             Monitor live air quality conditions and explore predictive trends on a clean, unified dashboard.
           </p>
-          <div className="mt-8 flex flex-wrap items-center gap-3 font-semibold text-sm">
-            <Button asChild size="lg" className="rounded-full bg-gradient-to-r from-brand to-brand-teal text-white hover:opacity-95 font-semibold">
+          <div className="flex flex-wrap items-center gap-3 text-sm">
+            <Button asChild size="lg" className="rounded-full bg-gradient-to-r from-brand to-brand-teal text-white hover:opacity-95 font-semibold px-6 py-5">
               <a href="#current">
-                Explore Dashboard <ArrowRight className="ml-1 h-4 w-4" />
+                Explore Dashboard <ArrowRight className="ml-1.5 h-4 w-4" />
               </a>
             </Button>
-            <Button asChild size="lg" variant="outline" className="rounded-full border-border/70 bg-card/70 backdrop-blur font-semibold">
+            <Button asChild size="lg" variant="outline" className="rounded-full border-border/70 bg-card/70 backdrop-blur font-semibold px-6 py-5">
               <a href="#hourly">
-                <Play className="mr-1 h-4 w-4" /> View Forecasts
+                <Play className="mr-1.5 h-4 w-4" /> View Forecasts
               </a>
             </Button>
-          </div>
-          <div className="mt-10 flex flex-wrap gap-6 text-xs text-muted-foreground font-medium">
-            <div><span className="mr-1 font-bold text-foreground">✓</span> Live Air Monitoring</div>
-            <div><span className="mr-1 font-bold text-foreground">✓</span> 6 Key Pollutants</div>
-            <div><span className="mr-1 font-bold text-foreground">✓</span> 24-Hour & 7-Day Forecasts</div>
           </div>
         </div>
+      </div>
 
+      {/* Middle Block: Full Width Showpiece Card (Kanpur Station Visual Window) */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <HeroVisual currentAQI={currentAQI} />
       </div>
+
+      {/* Bottom Block: Horizontal Stats Row (TRUSTmed inspired dark panels layout) */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <StatBarItem label="Live Air Monitoring" desc="Continuous telemetry stream" />
+        <StatBarItem label="6 Key Pollutants" desc="CPCB standard criteria tracking" />
+        <StatBarItem label="24-Hour & 7-Day Forecasts" desc="Predictive sequence calculations" />
+      </div>
     </section>
+  );
+}
+
+function StatBarItem({ label, desc }: { label: string; desc: string }) {
+  return (
+    <div className="flex flex-col rounded-2xl border border-border/60 bg-muted/20 px-6 py-4.5 transition-all duration-500 ease-out hover:scale-[1.03] hover:-translate-y-1.5 hover:bg-muted/40 hover:border-emerald-500/30 hover:shadow-xl hover:shadow-emerald-500/5 cursor-pointer">
+      <div className="flex items-center gap-2">
+        <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse-subtle" />
+        <span className="text-sm font-bold text-foreground">{label}</span>
+      </div>
+      <span className="mt-1 text-[11px] text-muted-foreground">{desc}</span>
+    </div>
   );
 }
 
@@ -61,34 +85,34 @@ function HeroVisual({ currentAQI }: HeroProps) {
   const aqi = currentAQI?.current_aqi != null ? Math.round(currentAQI.current_aqi) : 62;
 
   return (
-    <div className="relative mx-auto w-full max-w-lg">
-      <div className="glass-card relative overflow-hidden rounded-[2rem] p-6 bg-card border border-border/60 shadow-lg">
+    <div className="relative mx-auto w-full max-w-5xl group">
+      <div className="glass-card relative overflow-hidden rounded-[2.5rem] p-6 bg-card border border-border/60 shadow-2xl transition-all duration-700 ease-out hover:border-emerald-500/20 hover:shadow-[0_20px_50px_rgba(16,185,129,0.06)]">
         {/* skyline */}
-        <div className="relative h-64 overflow-hidden rounded-2xl bg-gradient-to-b from-brand-sky/25 via-card to-brand/10 dark:from-brand-sky/15 dark:via-card dark:to-brand/15">
-          <div className="absolute inset-x-0 top-4 flex items-center justify-between px-5 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
+        <div className="relative h-80 overflow-hidden rounded-3xl bg-gradient-to-b from-brand-sky/25 via-card to-brand/10 dark:from-brand-sky/15 dark:via-card dark:to-brand/15">
+          <div className="absolute inset-x-0 top-5 flex items-center justify-between px-6 text-[10px] font-bold uppercase tracking-widest text-muted-foreground/80">
             <span>Kanpur Monitoring Station</span>
-            <span className="inline-flex items-center gap-1">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" /> Online
+            <span className="inline-flex items-center gap-1.5">
+              <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-500" /> Online
             </span>
           </div>
           <SmartCitySVG />
         </div>
-        <div className="mt-5 grid grid-cols-3 gap-3">
+        <div className="mt-6 grid grid-cols-3 gap-4">
           <MiniStat icon={<CloudFog className="h-4 w-4" />} label="PM2.5" value={String(pm25)} unit="µg" tone="text-brand" />
           <MiniStat icon={<Atom className="h-4 w-4" />} label="NO₂" value={String(no2)} unit="ppb" tone="text-brand-teal" />
           <MiniStat icon={<Gauge className="h-4 w-4" />} label="AQI" value={String(aqi)} unit="idx" tone="text-brand-sky" />
         </div>
       </div>
-      <div className="absolute -right-4 -top-4 hidden rotate-3 rounded-2xl border border-border/60 bg-card/80 px-3 py-2 text-xs shadow-lg backdrop-blur sm:block">
+      <div className="absolute -right-3 -top-3 hidden rotate-2 rounded-2xl border border-border/60 bg-card/90 px-4 py-2.5 text-xs shadow-xl backdrop-blur sm:block transition-all duration-500 ease-out group-hover:rotate-0 group-hover:scale-105 group-hover:border-emerald-500/30 group-hover:-translate-y-1">
         <div className="flex items-center gap-2">
-          <Wind className="h-3.5 w-3.5 text-brand" />
-          <span className="font-semibold">🟢 Live Station</span>
-          <span className="text-emerald-500">Online</span>
+          <Wind className="h-4 w-4 text-brand" />
+          <span className="font-bold">🟢 Live Station</span>
+          <span className="text-emerald-500 font-semibold animate-pulse">Online</span>
         </div>
       </div>
-      <div className="absolute -bottom-4 -left-4 hidden -rotate-2 rounded-2xl border border-border/60 bg-card/80 px-3 py-2 text-xs shadow-lg backdrop-blur sm:block">
-        <div className="font-semibold text-foreground">Forecast Engine</div>
-        <div className="text-muted-foreground">24-Hour + 7-Day Predictions</div>
+      <div className="absolute -bottom-3 -left-3 hidden -rotate-2 rounded-2xl border border-border/60 bg-card/90 px-4 py-2.5 text-xs shadow-xl backdrop-blur sm:block transition-all duration-500 ease-out group-hover:rotate-0 group-hover:scale-105 group-hover:border-cyan-500/30 group-hover:translate-y-1">
+        <div className="font-bold text-foreground">Forecast Engine</div>
+        <div className="text-muted-foreground mt-0.5">24-Hour + 7-Day Predictions</div>
       </div>
     </div>
   );
@@ -96,13 +120,13 @@ function HeroVisual({ currentAQI }: HeroProps) {
 
 function MiniStat({ icon, label, value, unit, tone }: { icon: React.ReactNode; label: string; value: string; unit: string; tone: string }) {
   return (
-    <div className="rounded-xl border border-border/60 bg-card/70 px-3 py-2.5 backdrop-blur">
-      <div className={`flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider ${tone}`}>
+    <div className="rounded-2xl border border-border/60 bg-muted/20 px-4 py-3.5 backdrop-blur transition-all duration-500 ease-out hover:scale-[1.04] hover:-translate-y-1 hover:bg-muted/30 hover:border-brand-teal/40 hover:shadow-md cursor-pointer">
+      <div className={`flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider ${tone} transition-colors duration-300`}>
         {icon} {label}
       </div>
       <div className="mt-1 flex items-baseline gap-1">
-        <span className="text-lg font-bold text-foreground">{value}</span>
-        <span className="text-[10px] text-muted-foreground">{unit}</span>
+        <span className="text-2xl font-extrabold text-foreground tracking-tight">{value}</span>
+        <span className="text-[10px] text-muted-foreground font-semibold ml-0.5">{unit}</span>
       </div>
     </div>
   );
