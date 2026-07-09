@@ -1,5 +1,8 @@
 # Atmos Insight — Real-Time Air Quality Monitoring & AQI Forecasting
 
+[![Live App](https://img.shields.io/badge/Live-Application-emerald?style=for-the-badge)](https://atmos-insights-eh8e.vercel.app/)
+[![API Status](https://img.shields.io/badge/FastAPI-Backend-blue?style=for-the-badge)](https://atmos-insights.onrender.com/health)
+
 Atmos Insight is a modern, production-grade real-time air quality dashboard and forecasting application built using a decoupled architecture. The system leverages machine learning models trained on ground station history to estimate the current CPCB Air Quality Index (AQI) and project future forecasts (24-hour hourly and 7-day daily trends) for Kanpur, India.
 
 ---
